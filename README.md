@@ -40,3 +40,17 @@ npm run build
 ```
 yarn build
 ```
+
+## Типы данных
+
+interface ICard - карточка товара
+
+```
+id: string,
+    category: string;
+    title: string;
+    description:string;
+    image:string;
+    price:number | null;
+```
+
