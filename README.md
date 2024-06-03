@@ -105,11 +105,11 @@ interface ICardItem - Информация о товарах
 
 ```
     id: string;
-	title: string;
-	price: number | null;
+    title: string;
+    price: number | null;
     image: string;
-	description: string;
-	category: string;
+    description: string;
+    category: string;
 ```
 
 interface ICard extends IProduct - Отображение карточки товара
