@@ -84,21 +84,21 @@ interface IOrder extends IDeliveryForm, IContactForm - Информация о �
 
 ```
     total: number;
-	items: string[];
+    items: string[];
 ```
 
 interface IOrderResult - Ответ от сервера о заказе
 
 ```
     id: string;
-	total: number;
+    total: number;
 ```
 
 interface IPage - главная страница
 
 ```
     counter: number;
-	catalog: HTMLElement[];
+    catalog: HTMLElement[];
 ```
 
 interface ICardItem - Информация о товарах
@@ -116,7 +116,7 @@ interface ICard extends IProduct - Отображение карточки то�
 
 ```
     index?: string;
-	buttonTitle?: string;
+    buttonTitle?: string;
 ```
 
 interface IModalData - Товар в модальном окне 
@@ -129,14 +129,14 @@ interface IFormState - Форма
 
 ```
     valid: boolean;
-	errors: string[];
+    errors: string[];
 ```
 
 interface IBasketView - Отображение корзины товаров
 
 ```
     items: HTMLElement[];
-	total: number;
+    total: number;
 ```
 
 interface ISuccess - Отображения успешного заказа
@@ -149,7 +149,7 @@ interface IFormState - Состояние формы
 
 ```
     valid: boolean;
-	errors: string[];
+    errors: string[];
 ``
 
 Ошибка формы
