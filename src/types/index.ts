@@ -1,7 +1,7 @@
 
 export interface IAppState {
-    catalog: IProduct[];
-    basket: IProduct[];
+    catalog: ICardItem[];
+    basket: ICardItem[];
     preview: string | null;
     delivery: IDeliveryForm | null; 
     contact: IContactForm| null; 
@@ -50,7 +50,7 @@ export interface ICardItem {
 	image: string;
 }
 
-export interface ICard extends IProduct {
+export interface ICard extends ICardItem {
 	index?: string;
 	buttonTitle?: string;
 }
