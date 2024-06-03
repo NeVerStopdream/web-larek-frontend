@@ -53,5 +53,5 @@ id: string,
     image:string;
     price:number | null;
 ```
-ы
+
 
