@@ -1,58 +1,81 @@
-export interface ICard {
-    id: string,
-    category: string;
-    title: string;
-    description:string;
-    image:string;
-    price:number | null;
-}
-
-export interface IUser {
-    payment: string;
-    address:string;
-    email:string;
-    phone:string;
-    items:string[]
-    total: number  
-}
-
-export interface IOrderForm {
-    payment?: string;
-    email: string;
-    phone: string;
-    address:string
-}
-
-export type FormErrors = Partial<Record<keyof IOrderForm, string>>;
-
-export interface ICardList  {
-    total:number;
-    cards: ICard[]  
-    preview: string | null 
-}
-
-export interface IApi {
-    baseUrl: string;
-    get<T>(uri: string): Promise<T>;
-    post<T>(uri: string, data: object, method?: ApiPostMethods): Promise<T>;
-}
-
-type ApiPostMethods = 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-
-export interface IFormState {
-    valid: boolean;
-    errors: string[];
-}
 
 export interface IAppState {
-    catalog: ICard[];
-    basket: string[];
+    catalog: IProduct[];
+    basket: IProduct[];
     preview: string | null;
-    order: IUser;
-    loading: boolean;
+    delivery: IDeliveryForm | null; 
+    contact: IContactForm| null; 
+    order: IOrder| null;
+}
+
+export interface IActions {
+    onClick: (event: MouseEvent) => void;
+}
+
+export interface ISuccessActions {
+    onClick: ()  => void;
+}
+
+export interface IDeliveryForm  {
+    payment: string;
+    address: string;
+}
+
+export interface IContactForm {
+    email: string;
+    phone: string;
+}
+
+export interface IOrder extends IDeliveryForm, IContactForm {
+	total: number;
+	items: string[];
 }
 
 export interface IOrderResult {
     id: string;
-    total: number
+	total: number;
 }
+
+export interface IPage  {
+    counter: number;
+	catalog: HTMLElement[];
+}
+
+export interface ICardItem {
+	id: string;
+	title: string;
+	price: number | null;
+	description: string;
+	category: string;
+	image: string;
+}
+
+export interface ICard extends IProduct {
+	index?: string;
+	buttonTitle?: string;
+}
+
+export interface IModalData {
+	content: HTMLElement;
+}
+
+export interface IFormState {
+	valid: boolean;
+	errors: string[];
+}
+
+export interface IBasketView {
+	items: HTMLElement[];
+	total: number;
+}
+
+export interface ISuccess {
+	total: number;
+}
+
+export interface IFormState {
+	valid: boolean;
+	errors: string[];
+}
+
+export type FormErrors = Partial<Record<keyof IOrder, string>>;
