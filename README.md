@@ -11,7 +11,7 @@
 - src/pages/index.html — HTML-файл главной страницы
 - src/types/index.ts — файл с типами
 - src/index.ts — точка входа приложения
-- src/styles/styles.scss — корневой файл стилей
+- src/scss/styles.scss — корневой файл стилей
 - src/utils/constants.ts — файл с константами
 - src/utils/utils.ts — файл с утилитами
 
@@ -176,6 +176,10 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - get - отправляет запрос с данными и возвращает ответ сервера в виде промиса с объектом;
 - post - принимает объект с данными, обрабатывает и отправляет их как параметр при вызове метода;
 
+Конструктор:
+- baseUrl: string - URL основного API;
+- options: RequestInit = {} - дополнительные параметры для HTTP-запросов;
+
 
 ### Класс EventEmitter
 Реализует паттерн "Observer/Наблюдатель"
@@ -188,6 +192,8 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - offAll - удаляет все слушатели событий;
 - trigger - создает слушатель событие с заданными аргументами;
 
+Конструктор:
+- constructor() - создает _events, представляющую собой карту событий;
 
 ### Класс Component
 Абстрактный класс, создает компоненты подьзовательского интерфейса
@@ -201,12 +207,17 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - protected setImage - установить изображение с алтернативным текстом;
 - render - возвращает DOM-элемент;
 
+Конструктор:
+- constructor(container: HTMLElement) - контейнер, который является корневым DOM-элементом, в который будет вставлен компонент
 
 ### Класс Model
 Абстрактный класс, создает модальные окна
 
 Методы:
 - emitChanges - событие с названием и данными;
+
+Конструктор:
+- constructor(data: Partial, protected events: IEvents) - конструктор принимает данные модели и объект событий, копирует данные в модель
 
 
 ### Класс LarekApi
@@ -236,6 +247,9 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - validateDelivery - проверяет значения данных доставки;
 - validateContact - проверяет значения данных контактов;
 
+Конструктор:
+- constructor() - конструктор наследуется от класса Model
+
 ### Класс Modal
 Класс управляет отображением модальных окон
 
@@ -245,6 +259,8 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - content - содержимое модального окна;
 - render - отображает модальное окно с контентом и открывает его;
 
+Конструктор:
+- constructor(selector: string, events: IEvents) - принимает селектор по которому в разметке страницы будет установлено модальное окно и экземпляр класса EventEmitter для возможности инициализации событий
 
 ### Класс Form
 Класс создает формы, обрабатывает события ввода формы и отправки формы. Наследуется от Component
@@ -255,6 +271,8 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - set errors - отвечает за ошибки валидации формы;
 - render - отображает состояние формы;
 
+Конструктор:
+- constructor(protected container: HTMLFormElement, protected events: IEvents) - принимает контейнер с элементами формы, объект событий, используемый для всех полей ввода и кнопки отправки формы
 
 ### Класс Card
 Реализует интерфейс ICardItem, отображает карточки товара. Наследуется от Component
@@ -268,6 +286,9 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - set price - устанавливает цену карточки и, если цена установлена, отключает кнопку карточки;
 - inBasket - устанавливает, находится ли карточка в корзине, и, если нет, отключает кнопку карточки;
 
+Конструктор:
+- constructor(container: HTMLElement, actions?: ICardActions) - принимает контейнер для карточки и объект действий. В конструкторе устанавливаются обработчики событий для категории, заголовка, описания, кнопки, стоимости.
+
 
 ### Класс Basket
 Класс управляет отображением корзины товаров
@@ -277,6 +298,9 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - set items - добавляет товары в корзине;
 - set total - добавляет и отображает сумму товаров в корзине;
 
+Конструктор:
+- constructor(container: HTMLElement, protected events: EventEmitter) - принимает корневой элемент для корзины и объект событий
+
 ### Класс DeliveryForm
 Класс наследуется от Form
 
@@ -284,6 +308,8 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 - toggleButtons - переключает состояние кнопок способа оплаты;
 - set address - устанавливает адрес доставки;
 
+Конструктор:
+- constructor(container: HTMLFormElement, events: IEvents) - принимает элементы оплаты, контактные данные пользователя, объект событий;
 
 ### Класс Success
 Класс необходим для реализации модального окна успешного офомления заказа
@@ -291,6 +317,9 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 Методы:
 - set result - устанавливает сообщение об успешной оплате
 - set total - устанавливает общую стоимость товаров в корзине;
+
+Конструктор:
+- constructor(container: HTMLElement, actions: ISuccessActions) - принимает элемент успешной оплаты и устанавливает обработчик события для кнопки закрытия
 
 
 ## Взаимодействие компонентов
