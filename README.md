@@ -219,22 +219,21 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 Конструктор:
 - constructor(data: Partial, protected events: IEvents) - конструктор принимает данные модели и объект событий, копирует данные в модель
 
-### Класс AppState
+### Класс AppData
 Главная модель управления проектом. Наследуется от класса Model
 
 Методы:
+- addBasket - добавляет товар в корзину;
 - getCounter - возвращает количество товаров в корзине;
 - getSumAll - вывод суммы синапсов всех товаров в корзине;
 - clearBasket - очищает товары в корзине;
 - clearOrder - очищает данные заказа;
 - setCatalog - формирует каталог продуктов, преобразуя каждый элемент в экземпляр Product;
 - setPreview - предпросомотр продукта;
-- addToBasket - добавляет товар в корзину;
-- removeFromBasket - удаляет товар из корзины;
-- updateBasket - обновляет состояние корзины;
-- setDeliveryField - устанавливает значения в данные доставки;
+- removeBasket - удаляет товар из корзины;
+- setOrderField - обновляет поле формы заказа, проверяет валидность заказа;
 - setContactField - устанавливает значения в данные контактов заказа;
-- validateDelivery - проверяет значения данных доставки;
+- validateOrder - проверяет валидность полей формы заказа;
 - validateContact - проверяет значения данных контактов;
 
 Конструктор:
@@ -291,7 +290,7 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 Конструктор:
 - constructor(container: HTMLElement, protected events: EventEmitter) - принимает корневой элемент для корзины и объект событий
 
-### Класс DeliveryForm
+### Класс DeliveryOrderForm
 Класс наследуется от Form
 
 Методы:
@@ -306,10 +305,20 @@ export type FormErrors = Partial<Record<keyof IOrder, string>>;
 
 Методы:
 - set result - устанавливает сообщение об успешной оплате
-- set total - устанавливает общую стоимость товаров в корзине;
 
 Конструктор:
 - constructor(container: HTMLElement, actions: ISuccessActions) - принимает элемент успешной оплаты и устанавливает обработчик события для кнопки закрытия
+
+### Класс Page
+Класс необходим для управления содержимым страницы и отображения списка товаров и корзины
+
+Методы:
+- set catalog(items: HTMLElement[]) - показывает список товаров
+- set counter(value: number) - показывает количество товаров в корзине
+- set locked(value: boolean) - показывает состояние блокировки страницы
+
+Конструктор:
+- constructor(container: HTMLElement, protected events: IEvents) - в конструкторе устанавливается обработчик события для элемента корзины, который открывает окно выбранными товарами
 
 
 ## Взаимодействие компонентов
